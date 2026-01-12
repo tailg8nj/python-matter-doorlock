@@ -3,7 +3,8 @@ Utility Script for Managing Matter DoorLock Users and Credentials
 
 # Home Assistant
 
-Place the `matter_door_lock.py` in your Home Assistant configuration directory (ensure it is executable) and add the following to your `configuration.yaml`:
+Place the `matter_door_lock.py` in your Home Assistant configuration directory (ensure it is executable)
+and add the following to your `configuration.yaml`:
 
 ```yaml
 shell_command:
@@ -19,8 +20,9 @@ sequence:
       node_id: >
         {% set entity_id = 'lock.yale_smart_lock_with_matter' %}
         {% set device_id = device_id(entity_id) %}
-        {% set identifier = device_attr(device_id, 'identifiers') | map(attribute="1") | sort | first %}
-        {% set node_id = identifier.split('-')[1] | int %}
+        {% set matter_id = device_attr(device_id, 'identifiers') | selectattr(0, 'eq', 'matter') |
+           map(attribute=1) | select('match', 'deviceid_.*') | first %}
+        {% set node_id = matter_id.split('-')[1] | int %}
         {{ node_id }}
       sub_command: >-
         set-user --userIndex {{ user_index }} --userName {{ user_name }}

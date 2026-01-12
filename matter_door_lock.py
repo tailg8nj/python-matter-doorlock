@@ -140,6 +140,13 @@ async def main(args: Sequence[str] | None = None) -> None:
         required=True,
     )
     prog.add_argument(
+        "--websocketUrl",
+        dest="websocketUrl",
+        action="store",
+        type=str,
+        default="ws://localhost:5580/ws",
+    )
+    prog.add_argument(
         "--timeout",
         dest="timeout",
         action="store",
@@ -237,12 +244,13 @@ async def main(args: Sequence[str] | None = None) -> None:
     )
 
     namespace = vars(prog.parse_args(args)).copy()
+    websocket_url = namespace.pop("websocketUrl")
     timeout = namespace.pop("timeout")
     node_id = namespace.pop("nodeId")
     command = namespace.pop("command")(**namespace)
 
     async with ClientSession() as session:
-        client = MatterClient("ws://localhost:5580/ws", session)
+        client = MatterClient(websocket_url, session)
         event = Event()
         create_task(client.start_listening(event))
         await event.wait()

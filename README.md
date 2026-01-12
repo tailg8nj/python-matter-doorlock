@@ -49,10 +49,17 @@ fields:
       text: null
     name: User Type
     required: true
-    description: >-
-      kUnrestrictedUser kYearDayScheduleUser kWeekDayScheduleUser
-      kProgrammingUser kNonAccessUser kForcedUser kDisposableUser kExpiringUser
-      kScheduleRestrictedUser kRemoteOnlyUser
+    description: |-
+      kUnrestrictedUser
+      kYearDayScheduleUser
+      kWeekDayScheduleUser
+      kProgrammingUser
+      kNonAccessUser
+      kForcedUser
+      kDisposableUser
+      kExpiringUser
+      kScheduleRestrictedUser
+      kRemoteOnlyUser
 alias: Set Lock User
 description: ""
 ```

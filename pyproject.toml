@@ -14,3 +14,10 @@ dependencies = [
   # https://github.com/home-assistant/core/blob/dev/homeassistant/components/matter/manifest.json#L11
   "python-matter-server>=8.1.2,<9",
 ]
+
+[project.urls]
+Homepage = "https://github.com/tailg8nj/python-matter-doorlock"
+Issues = "https://github.com/tailg8nj/python-matter-doorlock/issues"
+
+[tool.black]
+line-length = 120

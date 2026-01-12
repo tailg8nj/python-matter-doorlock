@@ -33,8 +33,9 @@ Examples borrowed from:
 https://docs.nordicsemi.com/bundle/ncs-3.0.1/page/nrf/samples/matter/lock/README.html
 """
 
+
 def set_user(
-    userIndex: int, 
+    userIndex: int,
     userName: str,
     userUniqueID: int,
     userType: Clusters.DoorLock.Enums.UserTypeEnum,
@@ -49,38 +50,41 @@ def set_user(
         credentialRule=Clusters.DoorLock.Enums.CredentialRuleEnum.kSingle,
     )
 
+
 def get_user(userIndex: int):
     return Clusters.DoorLock.Commands.GetUser(userIndex=userIndex)
 
+
 def clear_user(userIndex: int):
     return Clusters.DoorLock.Commands.ClearUser(userIndex=userIndex)
+
 
 def set_credential(userIndex: int, credentialIndex: int, pin: str):
     return Clusters.DoorLock.Commands.SetCredential(
         operationType=Clusters.DoorLock.Enums.DataOperationTypeEnum.kAdd,
         credential=Clusters.DoorLock.Structs.CredentialStruct(
-            credentialType=Clusters.DoorLock.Enums.CredentialTypeEnum.kPin, 
-            credentialIndex=credentialIndex
+            credentialType=Clusters.DoorLock.Enums.CredentialTypeEnum.kPin, credentialIndex=credentialIndex
         ),
         credentialData=pin.encode(),
         userIndex=userIndex,
     )
 
+
 def get_credential(credentialIndex: int):
     return Clusters.DoorLock.Commands.GetCredentialStatus(
         credential=Clusters.DoorLock.Structs.CredentialStruct(
-            credentialType=Clusters.DoorLock.Enums.CredentialTypeEnum.kPin, 
-            credentialIndex=credentialIndex
+            credentialType=Clusters.DoorLock.Enums.CredentialTypeEnum.kPin, credentialIndex=credentialIndex
         )
     )
+
 
 def clear_credential(credentialIndex: int):
     return Clusters.DoorLock.Commands.ClearCredential(
         credential=Clusters.DoorLock.Structs.CredentialStruct(
-            credentialType=Clusters.DoorLock.Enums.CredentialTypeEnum.kPin, 
-            credentialIndex=credentialIndex
+            credentialType=Clusters.DoorLock.Enums.CredentialTypeEnum.kPin, credentialIndex=credentialIndex
         )
     )
+
 
 def enum_action(enum_class):
     """
@@ -93,14 +97,14 @@ def enum_action(enum_class):
             self,
             option_strings,
             dest,
-            nargs = None,
-            const = None,
-            default = None,
-            type = None,
-            choices = None,
-            required = False,
-            help = None,
-            metavar = None,
+            nargs=None,
+            const=None,
+            default=None,
+            type=None,
+            choices=None,
+            required=False,
+            help=None,
+            metavar=None,
         ) -> None:
             self.cls = enum_class
             super().__init__(
@@ -120,8 +124,8 @@ def enum_action(enum_class):
             self,
             parser,
             namespace,
-            values = None,
-            option_string = None,
+            values=None,
+            option_string=None,
         ) -> None:
             if not isinstance(values, str):
                 raise TypeError
@@ -259,16 +263,16 @@ async def main(args: Sequence[str] | None = None) -> None:
                 for cluster in endpoint.clusters.values():
                     if isinstance(cluster, Clusters.DoorLock):
                         response = await client.send_device_command(
-                            node_id, 
-                            endpoint.endpoint_id, 
+                            node_id,
+                            endpoint.endpoint_id,
                             command,
                             timed_request_timeout_ms=timeout,
                         )
                         print(json_dumps(response))
                         return
         raise RuntimeError(f"No DoorLock cluster found for node {node_id}")
-                      
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # Run the main coroutine
     run(main())

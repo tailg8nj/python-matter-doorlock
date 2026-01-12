@@ -3,6 +3,8 @@ Utility Script for Managing Matter DoorLock Users and Credentials
 
 # Home Assistant
 
+Requires the [Matter integration](https://www.home-assistant.io/integrations/matter/) to be installed.
+
 Place the `matter_door_lock.py` in your Home Assistant configuration directory (ensure it is executable)
 and add the following to your `configuration.yaml`:
 

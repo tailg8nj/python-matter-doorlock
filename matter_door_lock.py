@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python
 """
 Python Matter DoorLock cluster user and credential management utility.
 Copyright (C) 2026 Peter Babinski

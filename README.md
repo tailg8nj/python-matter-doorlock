@@ -22,7 +22,7 @@ sequence:
         {% set device_id = device_id(entity_id) %}
         {% set matter_id = device_attr(device_id, 'identifiers') | selectattr(0, 'eq', 'matter') |
            map(attribute=1) | select('match', 'deviceid_.*') | first %}
-        {% set node_id = matter_id.split('-')[1] | int %}
+        {% set node_id = matter_id.split('-')[1] | int(base=16) %}
         {{ node_id }}
       sub_command: >-
         set-user --userIndex {{ user_index }} --userName {{ user_name }}

@@ -1,12 +1,52 @@
 # python-matter-doorlock
 Utility Script for Managing Matter DoorLock Users and Credentials
 
+# Standalone Installation
+
+Create a virtual environment and install the package.
+
+```sh
+python -m venv .venv
+source .venv/bin/activate
+pip install .
+```
+
+# Usage
+
+```console
+% ./matter_door_lock.py -h          
+usage: matter_door_lock.py [-h] --nodeId NODEID [--websocketUrl WEBSOCKETURL] [--timeout TIMEOUT]
+                           {set-user,get-user,clear-user,set-credential,get-credential,clear-credential} ...
+
+Matter Door Lock Utility
+
+positional arguments:
+  {set-user,get-user,clear-user,set-credential,get-credential,clear-credential}
+
+options:
+  -h, --help            show this help message and exit
+  --nodeId NODEID
+  --websocketUrl WEBSOCKETURL
+  --timeout TIMEOUT
+```
+
+### Example
+
+To create your first user and pin:
+
+```sh
+./matter_door_lock.py --nodeId 3 --set-user --userIndex 1 --userName Test --userUniqueID 1234 \
+  --userType kUnrestrictedUser
+./matter_door_lock.py --nodeId 3 --set-credential --userIndex 1 --credentialIndex 1 --pin 6789
+```
+
 # Home Assistant
 
-Requires the [Matter integration](https://www.home-assistant.io/integrations/matter/) to be installed.
+Requires the [Matter integration](https://www.home-assistant.io/integrations/matter/) to be installed. This will ensure
+that the appropriate Python dependencies are available instead of having to create a separate environment.
 
-Place the `matter_door_lock.py` in your Home Assistant configuration directory (ensure it is executable)
-and add the following to your `configuration.yaml`:
+Place the `matter_door_lock.py` in your Home Assistant configuration directory (ensure it is executable) and add the
+following to your `configuration.yaml`:
 
 ```yaml
 shell_command:

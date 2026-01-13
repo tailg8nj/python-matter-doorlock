@@ -19,7 +19,7 @@ You can then create a script which executes the file (note the Jinja snippet to 
 sequence:
   - action: shell_command.matter_door_lock
     data:
-      node_id: >
+      node_id: >-
         {% set entity_id = 'lock.yale_smart_lock_with_matter' %}
         {% set device_id = device_id(entity_id) %}
         {% set matter_id = device_attr(device_id, 'identifiers') | selectattr(0, 'eq', 'matter') |

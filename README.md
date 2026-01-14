@@ -1,5 +1,8 @@
 # python-matter-doorlock
-Utility Script for Managing Matter DoorLock Users and Credentials
+
+A Utility Script for Managing Matter DoorLock Users and Credentials
+
+This script communicates via the [python-matter-server](https://github.com/matter-js/python-matter-server) websocket.
 
 # Standalone Installation
 

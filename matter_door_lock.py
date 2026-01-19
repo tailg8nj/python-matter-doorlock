@@ -148,7 +148,7 @@ async def main(args: Sequence[str] | None = None) -> None:
         dest="websocketUrl",
         action="store",
         type=str,
-        default="ws://localhost:5580/ws",
+        default="ws://core-matter-server:5580/ws",
     )
     prog.add_argument(
         "--timeout",
